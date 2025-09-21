@@ -8,7 +8,7 @@ URLS_IDENTIFIER = "Project URLs:"
 
 # Goal: parse json
 
-with open('example_json/Simple Undergrad.csv', mode ='r') as file:
+with open('scrapers/research_opportunities/example_json/Simple Undergrad.csv', mode ='r') as file:
     csvFile = csv.DictReader(file)
     for line in csvFile:
         info = line[""]
