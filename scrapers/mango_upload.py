@@ -13,6 +13,13 @@ with open('private.json', mode ='r') as file:
         client.admin.command('ping')
         print("Pinged your deployment. You successfully connected to MongoDB!")
 
-        print(client.list_database_names())
+        print(f'Available Databases: {client.list_database_names()}')
+
+        research_db = client['CMUResearchDatabase']
+
+        professor_col = research_db['Users']
+
+        x = professor_col.insert_one({"name": "Mackey"})
+
     except Exception as e:
         print(e)
