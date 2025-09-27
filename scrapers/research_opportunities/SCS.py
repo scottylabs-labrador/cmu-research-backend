@@ -20,7 +20,11 @@ scs_data = []
 
 # Goal: parse json
 
+<<<<<<< HEAD
 with open('example_json/Undergraduate Research Opportunities.csv', mode ='r') as file:
+=======
+with open('scrapers/research_opportunities/example_json/Simple Undergrad.csv', mode ='r') as file:
+>>>>>>> 32aa157a9189c954b51069d4e63ff5ab743373a2
     csvFile = csv.DictReader(file)
     for line in csvFile:
         info = line[""]
