@@ -1,6 +1,8 @@
 import csv
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from datetime import datetime
+import json
 
 CONTACT_IDENTIFIER = "Project Contact:"
 DESCRIPTION_IDENTIFIER = "Project Description:"
@@ -8,7 +10,9 @@ PREREQ_IDENTIFIER = "Prerequisite Knowledge:"
 RELEVANT_IDENTIFIER = "Link(s) to Relevant Papers:"
 URLS_IDENTIFIER = "Project URLs:"
 
-uri = "mongodb+srv://MongoAccess:<mongodbpw>@cluster0.a6odq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+with open('private.json', mode ='r') as file:
+    passwords = json.load(file)
+    uri = f"mongodb+srv://MongoAccess:{passwords['password']}@cluster0.a6odq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'), tlsAllowInvalidCertificates=True)
@@ -20,11 +24,7 @@ scs_data = []
 
 # Goal: parse json
 
-<<<<<<< HEAD
-with open('example_json/Undergraduate Research Opportunities.csv', mode ='r') as file:
-=======
-with open('scrapers/research_opportunities/example_json/Simple Undergrad.csv', mode ='r') as file:
->>>>>>> 32aa157a9189c954b51069d4e63ff5ab743373a2
+with open('scrapers/research_opportunities/example_json/Undergraduate Research Opportunities.csv', mode ='r') as file:
     csvFile = csv.DictReader(file)
     for line in csvFile:
         info = line[""]
@@ -45,6 +45,9 @@ with open('scrapers/research_opportunities/example_json/Simple Undergrad.csv', m
         project_department = line["Department"]
         project_time_commitment = line["Time Commitment (Hours/Week)"]
         
+        current_datetime = datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        
         temp_dict = {
 	    "Project Title": project_title,
             "Contact": project_contact,
@@ -53,7 +56,9 @@ with open('scrapers/research_opportunities/example_json/Simple Undergrad.csv', m
             "Time Commitment": project_time_commitment,
             "Date Published": project_date_added,
             "Relevant Links": project_relevant + project_URLs,
-            "Department": project_department
+            "Department": project_department,
+            "Link of Website": "https://www.cs.cmu.edu/research/undergraduate-research-opportunities/",
+            "Time Added": formatted_datetime
         }
         scs_data.append(temp_dict)
 
