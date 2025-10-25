@@ -1,3 +1,4 @@
+from urllib.parse import quote
 import requests
 import json
 
@@ -73,7 +74,7 @@ while i <= 600:
       headers = {
         'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
         'Connection': 'keep-alive',
-        'Referer': f'https://scholars.cmu.edu/{iD}-{firstName}-{lastName}',
+        'Referer': f'https://scholars.cmu.edu/{iD}-{quote(firstName)}-{quote(lastName)}',
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
