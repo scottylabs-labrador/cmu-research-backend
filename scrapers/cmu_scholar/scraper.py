@@ -3,6 +3,48 @@ import requests
 import json
 
 url = "https://scholars.cmu.edu/api/users"
+groupUrl = "https://scholars.cmu.edu/api/groups"
+groupIdToCollege = {}
+existingGroups = {"School of Computer Science", "College of Engineering", "College of Fine Arts", "Dietrich College of Humanities and Social Sciences", "Mellon College of Science", "Heinz College of Information Systems and Public Policy", "Tepper School of Business", "Carnegie Mellon University Qatar"}
+
+try:
+  payload = json.dumps({
+    "params": {
+      "by": "text",
+      "category": "group"
+    },
+    "filters": []
+  })
+  headers = {
+    'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
+    'Connection': 'keep-alive',
+    'Origin': 'https://scholars.cmu.edu',
+    'Referer': 'https://scholars.cmu.edu/search?by=text&type=group',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
+    'accept': 'application/json',
+    'content-type': 'application/json',
+    'sec-ch-ua': '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"macOS"',
+    'Cookie': 'cookieConsent=WzAsZmFsc2Vd; intercom-device-id-g60t55rg=277da096-9a12-4ab3-8c45-5b43203b4e63; intercom-session-g60t55rg=cythaWhXU2gyckxWdlpGT0NjeGxxTFl5a3MwV2wzWlBRU2lSeHpjRWNvRk5SbTlvYUpFRUN0T1FxY0ZTdWptUTN6OFh0cGpTckhGUGJTSXM5Qk9zcUZSZ1RpUXRSWUxNUFFoM0RzZm1idEU9LS1RajRwTTdlWGlxWWFvekhvZUpoeHhBPT0=--d8895826a2542ca0682d630fa2470e0a9bf3f9f5'
+  }
+
+  response = requests.request("POST", groupUrl, headers=headers, data=payload)
+  resource_dict = response.json()["resource"]
+  for resource in resource_dict:
+    name = resource["name"]
+    if name == "Software Engineering Institute":
+      name = "School of Computer Science"
+    elif name not in existingGroups:
+      name = "UnAffliated"
+    groupIdToCollege[resource["discoveryId"]] = name
+except Exception as e:
+    print(f"Error: {e}")
+
+print(f'Group Ids Mapping: {groupIdToCollege}')
 
 i=0
 while i <= 600:
