@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import json
 
-with open('private.json', mode ='r') as file:
+with open('C:/Users/irisy/Desktop/15-112/hackathon/cmu-research-backend/private.json', mode ='r') as file:
     passwords = json.load(file)
 
     uri = f"mongodb+srv://MongoAccess:{passwords['password']}@cluster0.a6odq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
