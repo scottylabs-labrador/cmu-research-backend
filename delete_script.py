@@ -1,8 +1,9 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import json
+import csv
 
-with open('C:/Users/irisy/Desktop/15-112/hackathon/cmu-research-backend/private.json', mode ='r') as file:
+with open('C:/Users/irisy/Desktop/scottylabs/private.json', mode ='r') as file:
     passwords = json.load(file)
 
     uri = f"mongodb+srv://MongoAccess:{passwords['password']}@cluster0.a6odq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
@@ -17,9 +18,9 @@ with open('C:/Users/irisy/Desktop/15-112/hackathon/cmu-research-backend/private.
 
         research_db = client['CMUResearchDatabase']
 
-        professor_col = research_db['Users']
+        professor_col = research_db['ResearchOpportunities']
 
-        x = professor_col.insert_one({"name": "Mackey"})
+        reslult = professor_col.delete_many({})
 
     except Exception as e:
         print(e)
