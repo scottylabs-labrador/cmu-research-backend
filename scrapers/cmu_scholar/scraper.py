@@ -141,29 +141,29 @@ def cmu_scholar_scrape():
             college.append(groupIdToCollege[str(k)])
           else:
             pass
-        if ("tabSummaryAbout" in prof_data):
-          bio = prof_data["tabSummaryAbout"]
-        if ("phoneNumbers" in prof_data):
-          number = prof_data["phoneNumbers"][0]["number"]
-        if ("embeddableMediaList" in prof_data):
-          media = prof_data["embeddableMediaList"]
-        if ("academicAppointments" in prof_data):
-          position = prof_data["academicAppointments"]
-        if ("tags" in prof_data):
-          tags = prof_data["tags"]["implicit"]
-        data = {
-            "Name": prof_name,
-            "College": college,
-            "Department": department,
-            "Email": email,
-            "Phone Number": number,
-            "Bio": bio,
-            "Media": media,
-            "Positions": position,
-            "Tags": tags
-        }
-        professors[prof_name] = data
-      i += 25
+          if ("tabSummaryAbout" in prof_data):
+            bio = prof_data["tabSummaryAbout"]
+          if ("phoneNumbers" in prof_data):
+            number = prof_data["phoneNumbers"][0]["number"]
+          if ("embeddableMediaList" in prof_data):
+            media = prof_data["embeddableMediaList"]
+          if ("academicAppointments" in prof_data):
+            position = prof_data["academicAppointments"]
+          if ("tags" in prof_data):
+            tags = prof_data["tags"]["implicit"]
+          data = {
+              "Name": prof_name,
+              "College": college,
+              "Department": department,
+              "Email": email,
+              "Phone Number": number,
+              "Bio": bio,
+              "Media": media,
+              "Positions": position,
+              "Tags": tags
+          }
+          professors[prof_name] = data
+        i += 25
     except Exception as e:
       print(f"Error: {e}")
   return professors
