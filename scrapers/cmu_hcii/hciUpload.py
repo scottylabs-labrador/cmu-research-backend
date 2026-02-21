@@ -3,7 +3,7 @@ from pymongo.server_api import ServerApi
 import json
 import csv
 
-with open('C:/Users/irisy/Desktop/scottylabs/private.json', mode ='r') as file:
+with open('private.json', mode ='r') as file:
     passwords = json.load(file)
 
     uri = f"mongodb+srv://MongoAccess:{passwords['password']}@cluster0.a6odq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
@@ -21,7 +21,7 @@ with open('C:/Users/irisy/Desktop/scottylabs/private.json', mode ='r') as file:
         professor_col = research_db['ResearchOpportunities']
         
         data_to_insert = []
-        with open('C:/Users/irisy/Desktop/15-112/hackathon/cmu-research-backend/scrapers/research_opportunities/cleaned_projects.csv', newline='', encoding='utf-8') as csvfile:
+        with open('cmu-research-backend/scrapers/cmu_hcii/cleaned_projects.csv', newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)  # automatically uses header row as keys
             for row in reader:
                 data_to_insert.append(dict(row))

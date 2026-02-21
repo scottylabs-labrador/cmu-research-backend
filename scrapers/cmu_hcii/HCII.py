@@ -7,10 +7,6 @@ HCII_COLLEGE_NAME = "School of Computer Science"
 
 
 def build_contact_mapping(row):
-    """
-    Return a dict: { 'Full Name': 'andrewid' }.
-    If we can't find an Andrew ID, we use "".
-    """
     name = (row.get("Your Name") or "").strip()
     email = (row.get("Email Contact") or "").strip()
 
@@ -45,6 +41,7 @@ def reformat_projects(infile, outfile):
         "Position",
         "Paid/Unpaid",
         "Desired Skill Level",
+        "Source",
     ]
 
     # Resolve paths relative to this script file
@@ -79,6 +76,7 @@ def reformat_projects(infile, outfile):
             "Position": parts[0] if len(parts) > 0 else "",
             "Paid/Unpaid": parts[1] if len(parts) > 1 else "",
             "Desired Skill Level": (row.get("Seeking:") or "").strip(),
+            "Source": "https://docs.google.com/spreadsheets/d/1AtmjGPa0gTOezwukgJiRWcvzQXZYL1lueRqrE5ayWcQ/edit?gid=1632610366#gid=1632610366",
         })
 
     # ---- WRITE OUTPUT CSV ----
